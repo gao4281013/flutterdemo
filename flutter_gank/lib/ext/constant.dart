@@ -49,7 +49,7 @@ Widget buildDailyListView(BuildContext context, AsyncSnapshot snapShot){
         content.addAll(response.results[row]);
       });
       print(content);
-      return buildl
+      return buildListviewBuilder(context, content);
     }
   }
 
@@ -114,7 +114,36 @@ Widget buildRow(context,one){
     ),
     );
   } else {
-
+    return new InkWell(
+      onTap: (){
+        Navigator.push(context,
+            new MaterialPageRoute(builder: (BuildContext context){
+              return new PostPage(postData.toJson());
+            }));
+      },child:
+    new Card(
+      margin: new EdgeInsets.all(2.0),
+      child: new Padding(padding: new EdgeInsets.all(8.0),
+        child: new Column(
+          children: <Widget>[
+            new Container(
+              margin: new EdgeInsets.fromLTRB(2.0,4.0,2.0,4.0),
+              child:
+              new Align(
+                alignment: Alignment.centerLeft,
+                child: new Text(postData.desc,
+                  style: new TextStyle(fontSize: 16.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        ),
+    ),
+  );
   }
 
 }
