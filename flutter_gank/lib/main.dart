@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gank/theme/theme.dart';
+import 'package:flutter_gank/page/home_page.dart';
 
 void main() => runApp(new MyHomePage());
 
@@ -22,9 +23,11 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return new MaterialApp(
       title:'干货集中营',
-      home:new Center(
-
-      ),
+      home:new HomePage(_appTheme, (theme){
+        setState(() {
+          _appTheme = theme;
+        });
+      }),
       theme: _appTheme.theme,
     );
   }
