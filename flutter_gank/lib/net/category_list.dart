@@ -30,9 +30,44 @@ class _FeedListState extends State<FeedList> {
               switch(snapshot.connectionState){
                 case ConnectionState.none:
                 case ConnectionState.waiting:
-                  return ext.bu
+                  return ext.buildLoadingIndicator();
+                default :
+                  if(snapshot.hasError){
+                    return ext.buildExceptionIndicator(snapshot.error);
+                  }else{
+                     return _buildListView(context, snapshot);
+                  }
               }
             }),
-        onRefresh: null);
+        onRefresh: loadData);
+  }
+
+  Widget _buildListView(BuildContext context,AsyncSnapshot snapshot){
+    print(snapshot);
+    CategoryResponse categoryResponse = CategoryResponse.fromJson(jsonDecode(
+        snapshot.data));
+    List results = categoryResponse.results;
+    switch(results.length){
+      case 1:
+        return new Center(
+          child: new Card(
+            elevation: 16.0,
+            child: new Text("暂无数据"),
+          ),
+        );
+      default:
+        return ext.buildListviewBuilder(context, results);
+    }
+  }
+
+
+  Future<Null> loadData() async{
+    await ext.get(widget.url);
+    if(!mounted)return;
+    setState(() {
+
+    });
   }
 }
+
+
