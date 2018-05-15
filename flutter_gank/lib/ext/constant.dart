@@ -9,6 +9,9 @@ import 'package:flutter_gank/page/post_page.dart';
 
 final String  GATEGORY_URL_PREFIX = 'http://gank.io/api/data/';
 
+final String  DAILY_URL_PREFIX = 'http://gank.io/api/day';
+
+
 String generateCategoryUrl(feedType,pageSize,pageNum){
   return GATEGORY_URL_PREFIX+feedType+'/'+pageSize.toString()+'/'+pageNum.toString();
 }
