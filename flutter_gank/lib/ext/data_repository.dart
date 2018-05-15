@@ -18,9 +18,11 @@ class CategoryResponse{
 
   CategoryResponse(this.error, this.results);
 
-  CategoryResponse.fromJson(Map<String,dynamic> json)
-      :error = json['error'],
-        results = json['results'];
+  CategoryResponse.fromJson(Map<String,dynamic> json){
+    this.error = json['error'];
+    this.results = json['results'];
+  }
+
 
 }
 

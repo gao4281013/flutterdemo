@@ -44,8 +44,8 @@ class _FeedListState extends State<FeedList> {
 
   Widget _buildListView(BuildContext context,AsyncSnapshot snapshot){
     print(snapshot);
-    CategoryResponse categoryResponse = CategoryResponse.fromJson(jsonDecode(
-        snapshot.data));
+    CategoryResponse categoryResponse = CategoryResponse.fromJson(
+        jsonDecode(snapshot.data));
     List results = categoryResponse.results;
     switch(results.length){
       case 1:
