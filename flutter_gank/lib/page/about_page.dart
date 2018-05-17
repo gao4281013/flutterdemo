@@ -125,13 +125,13 @@ class _AboutPageState extends State<AboutPage> {
                   new Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: new Wrap(
-                      children: _buildChips(mCartoonTags, true),
+                      children: _buildChips(mCartoonTags, false),
                     ),
                   ),
                   new Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: new Wrap(
-                      children: _buildChips(mSelfTag, false),
+                      children: _buildChips(mSelfTag, true),
                     ),
                   ),
                   new Padding(padding: const EdgeInsets.all(24.0))
@@ -200,6 +200,6 @@ class _AboutPageState extends State<AboutPage> {
     assert(name.length > 1);
     final int hash = name.hashCode & 0xffff;
     final double hue = 360.0 * hash / (1 << 15);
-    return new HSVColor.fromAHSV(1.0, hue, 0.4, 0.09).toColor();
+    return new HSVColor.fromAHSV(1.0, hue, 0.4, 0.90).toColor();
   }
 }
