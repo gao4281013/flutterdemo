@@ -9,7 +9,7 @@ class DialyPage extends StatefulWidget {
 }
 
 class _DialyPageState extends State<DialyPage> {
-  DateTime selectedDate = new DateTime.utc(2107,08,01,10,00);
+  DateTime selectedDate = new DateTime.now();
 
   final String _url = "http://gank.io/api/day";
 
@@ -57,7 +57,7 @@ class _DialyPageState extends State<DialyPage> {
          context: context,
          initialDate: selectedDate,
          firstDate: new DateTime(2015,8),
-         lastDate: new DateTime(2017,9)
+         lastDate: new DateTime(2101)
      );
 
      if(picked !=null && picked != selectedDate){

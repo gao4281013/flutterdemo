@@ -24,7 +24,7 @@ class _DailyListState extends State<DailyList> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container();
+    return createBody();
   }
 
   Widget createBody(){
