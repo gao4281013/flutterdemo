@@ -7,7 +7,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gank/ext/data_repository.dart';
 import 'package:flutter_gank/page/post_page.dart';
 
-final String  GATEGORY_URL_PREFIX = 'http://gank.io/data';
+final String  GATEGORY_URL_PREFIX = 'http://gank.io/api/data/';
+
+final String  DAILY_URL_PREFIX = 'http://gank.io/api/day';
+
 
 String generateCategoryUrl(feedType,pageSize,pageNum){
   return GATEGORY_URL_PREFIX+feedType+'/'+pageSize.toString()+'/'+pageNum.toString();
@@ -55,6 +58,24 @@ Widget buildDailyListView(BuildContext context, AsyncSnapshot snapShot){
 
 }
 
+
+
+Widget buildCategoryListView(BuildContext context, AsyncSnapshot snapShot){
+  print(snapShot);
+  CategoryResponse categoryResponse = CategoryResponse.fromJson(
+      jsonDecode(snapShot.data));
+  List results = categoryResponse.results;
+  if(categoryResponse.error){
+    return buildExceptionIndicator("网络请求错误");
+  }else{
+    if(categoryResponse.results.length ==0){
+      return buildExceptionIndicator("这里空空的什么也没有...");
+    }else{
+      return buildListviewBuilder(context, results);
+    }
+  }
+
+}
 
 Widget buildListviewBuilder(context,List content){
   return new ListView.builder(
@@ -138,6 +159,38 @@ Widget buildRow(context,one){
                   ),
                 ),
               ),
+            ),
+            new Container(
+              margin: new EdgeInsets.fromLTRB(2.0,4.0,2.0,4.0),
+              child:  new Align(
+                alignment: Alignment.centerLeft,
+                child: new Text(postData.who.toString(),
+                  style: new TextStyle(fontSize: 12.0,
+                      color: Colors.grey,
+                  ),
+                ),
+              ),
+            ),
+            new Row(
+              children: <Widget>[
+                new Align(
+                  alignment: Alignment.centerLeft,
+                  child: new Card(
+                    color: tagColors[postData.type],
+                    child:
+                    new Padding(padding: new EdgeInsets.all(2.0),
+                      child: new Text(one['type'],
+                      style: new TextStyle(color: Colors.white),
+                    )
+                  ),
+                ),
+                ),
+                new Expanded(
+                    child: new Align(
+                      alignment: Alignment.centerLeft,
+                      child: new Text(postData.publishedAt),
+                    ))
+              ],
             ),
           ],
         ),
